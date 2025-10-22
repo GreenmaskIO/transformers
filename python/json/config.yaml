@@ -1,0 +1,39 @@
+common:
+  pg_bin_path: "/usr/lib/postgresql/16/bin"
+  tmp_dir: "/tmp"
+
+storage:
+  type: "s3"
+  s3:
+    endpoint: "http://playground-storage:9000"
+    bucket: "adventureworks"
+    region: "us-east-1"
+    access_key_id: "Q3AM3UQ867SPQQA43P2F"
+    secret_access_key: "zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG"
+
+dump:
+  pg_dump_options: # pg_dump option that will be provided
+    dbname: "host=playground-db user=postgres password=example dbname=postgres"
+    jobs: 10
+
+  transformation: # List of tables to transform
+    - schema: "public"
+      name: "test"
+      transformers:
+        - name: "Cmd"
+          params:
+            driver:
+              # The one column will be provided to the command via STDIN as a text with UTF-8 encoding
+              name: "text"
+            # The expected exit code from the command
+            expected_exit_code: -1
+            # Should CMD transformer perform validation of the transformed data via PostgreSQL driver:
+            # This may slow down the transformation.
+            validate: true
+            skip_on_behaviour: "any"
+            timeout: 60s
+            executable: "./example.py"
+            columns:
+              - name: "data"
+                # If true, the original data will not be provided to the command via STDIN
+                skip_on_null_input: true
