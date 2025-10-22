@@ -67,7 +67,7 @@ docker compose run greenmask
 Once in the container you can run validate command:
 
 ```shell
-greenmask --config config.yaml validate --data --diff --rows-limit=4 --format=vertical
+greenmask --config config.yaml validate --data --diff --rows-limit=4
 ```
 
 The resul t should be similar to:
