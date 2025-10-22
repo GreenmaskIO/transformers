@@ -86,12 +86,6 @@ The resul t should be similar to:
 
 ```
 
-To execute the transformation use the command below inside the container:
-
-```shell
-greenmask --confi
-
-
 If you want to connect to database:
 
 ```shell
