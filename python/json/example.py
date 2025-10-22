@@ -39,6 +39,10 @@ def dump_json(json_data: dict | list | None) -> str:
 
 
 def transform_json(json_data: dict | list) -> dict | list | None:
+    """
+    This is a main transformation function that modifies the input JSON data.
+    You can implement any transformation logic here as per your requirements.
+    """
     if json_data is None:
         # Is Null (meaning None) keep it as is
         return None
